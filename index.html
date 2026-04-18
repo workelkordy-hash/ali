@@ -2,7 +2,10 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>Advanced Dashboard</title>
+<title>Pro Dashboard</title>
+
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
 body {
@@ -12,102 +15,110 @@ body {
   color: #fff;
 }
 
-/* خلفية */
-body::before {
-  content: "";
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: url("https://www.transparenttextures.com/patterns/stardust.png");
-  opacity: 0.3;
-  z-index: -1;
-}
-
-/* Top Bar */
+/* Top */
 .top {
   display: flex;
   justify-content: center;
   gap: 10px;
   padding: 10px;
-  flex-wrap: wrap;
+  background: #111;
 }
 
 input {
   padding: 8px;
-  border-radius: 5px;
+  border-radius: 4px;
   border: none;
 }
 
 button {
-  padding: 8px;
-  border-radius: 5px;
+  padding: 8px 12px;
   border: none;
   cursor: pointer;
 }
 
 /* Navbar */
 .navbar {
-  background: #ddd;
+  background: #e0e0e0;
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
   position: relative;
 }
 
-.navbar button {
-  background: transparent;
-  margin: 5px;
+.nav-item {
+  position: relative;
+  padding: 12px 20px;
+  cursor: pointer;
   font-weight: bold;
 }
 
-.navbar button.active {
-  background: purple;
-  color: white;
+.nav-item:hover {
+  background: #7d3c98;
+  color: #fff;
 }
 
 /* Mega Menu */
 .mega {
-  display: none;
   position: absolute;
   top: 100%;
   left: 0;
   width: 100%;
   background: #111;
-  padding: 15px;
-  flex-wrap: wrap;
+  display: flex;
   justify-content: center;
+  gap: 40px;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: 0.3s;
 }
 
-.mega a {
-  margin: 6px 10px;
-  color: white;
-  text-decoration: none;
+.nav-item:hover .mega {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Columns */
+.column {
+  min-width: 200px;
+}
+
+.column h4 {
+  color: #aaa;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 5px;
   font-size: 13px;
 }
 
-.mega a:hover {
-  text-decoration: underline;
-}
-
-/* Active */
-.mega.active {
+/* Links */
+.column a {
   display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 6px 0;
+  color: #fff;
+  font-size: 13px;
+  text-decoration: none;
+  transition: 0.2s;
 }
 
-/* Search */
-.search {
-  text-align: center;
-  margin: 10px;
+.column a:hover {
+  color: #9b59b6;
+  transform: translateX(5px);
 }
 
-.search input {
-  width: 300px;
+/* Icons */
+.column i {
+  color: #9b59b6;
 }
 
 /* Footer */
 .footer {
   text-align: center;
   margin-top: 30px;
+  color: #aaa;
 }
 </style>
 </head>
@@ -125,99 +136,80 @@ button {
 
 <!-- Navbar -->
 <div class="navbar">
-  <button onclick="openMenu(event,'sales')" class="active">SR Sales</button>
-  early renewal
-  <button onclick="openMenu(event,'tech')">SR Technical</button>
-  <button onclick="openMenu(event,'billing')">Billing</button>
-  <button onclick="openMenu(event,'mobile')">Mobile</button>
-</div>
 
-<!-- Search -->
-<div class="search">
-  <input type="text" placeholder="Search..." onkeyup="search(this.value)">
-</div>
+  <!-- SALES -->
+  <div class="nav-item">SR Sales
+    <div class="mega">
 
-<!-- Mega Menus -->
+      <div class="column">
+        <h4>Billing</h4>
+        <a href="#"><i class="fa-solid fa-file-invoice"></i> Billing</a>
+        <a href="#"><i class="fa-solid fa-money-bill"></i> Payment Methods</a>
+        <a href="#"><i class="fa-solid fa-rotate-left"></i> Refund</a>
+      </div>
 
-<div id="sales" class="mega active">
-  <a href="#">Valid offers</a>
-  <a href="#">Expired offers</a>
-  <a href="#">Early renewal</a>
-  <a href="#">Suspension</a>
-  <a href="#">Individual Case</a>
-  <a href="#">Price and Quota</a>
-</div>
+      <div class="column">
+        <h4>Offers</h4>
+        <a href="#"><i class="fa-solid fa-gift"></i> Valid offers</a>
+        <a href="#"><i class="fa-solid fa-clock"></i> Expired offers</a>
+        <a href="#"><i class="fa-solid fa-bolt"></i> Extra Quota</a>
+      </div>
 
-<div id="tech" class="mega">
-  <a href="#">Speed Test</a>
-  <a href="#">Connection Issue</a>
-  <a href="#">Router Config</a>
-  <a href="#">Signal Issue</a>
-  <a href="#">Complaint</a>
-</div>
+      <div class="column">
+        <h4>Technical</h4>
+        <a href="#"><i class="fa-solid fa-wifi"></i> Speed Test</a>
+        <a href="#"><i class="fa-solid fa-triangle-exclamation"></i> System Outage</a>
+      </div>
 
-<div id="billing" class="mega">
-  <a href="#">Landline Bills</a>
-  <a href="#">Payment Methods</a>
-  <a href="#">Refund</a>
-  <a href="#">Invoice</a>
-</div>
+      <div class="column">
+        <h4>Account</h4>
+        <a href="#"><i class="fa-solid fa-user"></i> Username & Password</a>
+        <a href="#"><i class="fa-solid fa-gear"></i> Change Data</a>
+      </div>
 
-<div id="mobile" class="mega">
-  <a href="#">Recharge</a>
-  <a href="#">Packages</a>
-  <a href="#">Offers</a>
-  <a href="#">SIM Replacement</a>
+      <div class="column">
+        <h4>Support</h4>
+        <a href="#"><i class="fa-solid fa-headset"></i> Complaint</a>
+        <a href="#"><i class="fa-solid fa-comments"></i> Chat Bot</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TECH -->
+  <div class="nav-item">SR Technical
+    <div class="mega">
+      <div class="column">
+        <h4>Internet</h4>
+        <a href="#"><i class="fa-solid fa-wifi"></i> Connection Issue</a>
+        <a href="#"><i class="fa-solid fa-router"></i> Router Config</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOBILE -->
+  <div class="nav-item">Mobile
+    <div class="mega">
+      <div class="column">
+        <h4>Mobile</h4>
+        <a href="#"><i class="fa-solid fa-mobile"></i> Recharge</a>
+        <a href="#"><i class="fa-solid fa-sim-card"></i> SIM Replacement</a>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <div class="footer">
-  <h2>Ireport / Cases</h2>
+  <h3>Ireport / Cases</h3>
 </div>
 
 <script>
-
-/* Copy */
 function copy(id){
   let input = document.getElementById(id);
   input.select();
   document.execCommand("copy");
 }
-
-/* Open Menu */
-function openMenu(evt,id){
-  let menus = document.querySelectorAll(".mega");
-  let btns = document.querySelectorAll(".navbar button");
-
-  menus.forEach(m=>m.classList.remove("active"));
-  btns.forEach(b=>b.classList.remove("active"));
-
-  document.getElementById(id).classList.add("active");
-  evt.currentTarget.classList.add("active");
-}
-
-/* Search */
-function search(val){
-  val = val.toLowerCase();
-  let links = document.querySelectorAll(".mega a");
-
-  links.forEach(l=>{
-    if(l.textContent.toLowerCase().includes(val)){
-      l.style.display="inline";
-    }else{
-      l.style.display="none";
-    }
-  });
-}
-
-/* حفظ البيانات */
-window.onload = function(){
-  num1.value = localStorage.getItem("num1") || "";
-  num2.value = localStorage.getItem("num2") || "";
-}
-
-num1.oninput = ()=> localStorage.setItem("num1", num1.value);
-num2.oninput = ()=> localStorage.setItem("num2", num2.value);
-
 </script>
 
 </body>
